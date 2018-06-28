@@ -1,14 +1,20 @@
 #pragma once
+
 #include <GLEW/glew.h>
+#include <vector>
 
 class Mesh
 {
 public:
-	Mesh();
+	Mesh(std::vector<GLfloat>& vertices, std::vector<GLfloat>& colors, std::vector<GLuint>& indices);
 	~Mesh();
+	void draw();
 protected:
 private:
-	Mesh(const Mesh& mesh) {}
-	void operator=(const Mesh& mesh) {}
-	GLuint m_vaoID;
+	GLuint vaoID;
+	GLuint eaoID;
+	GLuint vboIDs[2];
+
+	int numVertices;
+	int numIndices;
 };

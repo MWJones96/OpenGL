@@ -25,3 +25,10 @@ GLFWwindow* Display::getWindow()
 {
 	return window;
 }
+
+void Display::clearScreen()
+{
+	//Clears the screen to a default blue background
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(1.0, 1.0, 1.0, 1.0);
+}

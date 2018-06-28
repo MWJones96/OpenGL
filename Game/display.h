@@ -8,6 +8,7 @@ public:
 	Display(int width, int height, const std::string& title);
 	~Display();
 	GLFWwindow* getWindow();
+	void clearScreen();
 protected:
 private:
 	Display(const Display& display) {}
