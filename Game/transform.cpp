@@ -1,5 +1,6 @@
 #include "GLM/glm.hpp"
 #include "transform.h"
+#include "camera.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include "GLM/gtx/transform.hpp"
@@ -27,4 +28,12 @@ glm::mat4 Transform::getMatrix()
 	glm::mat4 rotMat = rotX * rotY * rotZ;
 
 	return translateMat * rotMat * scaleMat;
+}
+
+glm::mat4 Transform::getMVP(const Camera& camera)
+{
+	//glm::mat4 VP = camera.getViewProjection();
+	glm::mat4 M = getMatrix();
+
+	return M;
 }

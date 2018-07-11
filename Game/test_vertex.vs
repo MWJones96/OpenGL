@@ -1,14 +1,15 @@
-#version 430
+#version 330
 
-in vec3 position;
-in vec3 vertexColor;
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec2 texCoord;
+layout (location = 2) in vec3 vertexNormal;
 
-uniform mat4 transformMatrix;
+out vec3 normal0;
 
-out vec3 color;
+uniform mat4 MVP;
 
 void main()
 {
-	gl_Position = transformMatrix * vec4(position, 1.0);
-	color = vertexColor;
+	gl_Position = MVP * vec4(position, 1.0);
+	normal0 = (MVP * vec4(vertexNormal, 1.0)).xyz;
 }

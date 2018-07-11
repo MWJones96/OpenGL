@@ -1,20 +1,30 @@
 #pragma once
 
 #include <GLEW/glew.h>
+#include "obj_loader.h"
 #include <vector>
 
 class Mesh
 {
 public:
-	Mesh(std::vector<GLfloat>& vertices, std::vector<GLfloat>& colors, std::vector<GLuint>& indices);
+	Mesh(const std::string& fileName);
 	~Mesh();
+	void InitMesh(const IndexedModel& model);
 	void draw();
 protected:
 private:
-	GLuint vaoID;
-	GLuint eaoID;
-	GLuint vboIDs[2];
+	enum Attribs
+	{
+		POSITION,
+		COLOR,
+		NORMAL,
+		INDEX,
 
-	int numVertices;
+		NUM_BUFFERS
+	};
+
+	GLuint vaoID;
+	GLuint vboIDs[NUM_BUFFERS];
+
 	int numIndices;
 };

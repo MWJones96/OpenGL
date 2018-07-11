@@ -1,5 +1,6 @@
 #include "transform.h"
 #include "shader.h"
+#include "camera.h"
 #include <sstream>
 #include <fstream>
 #include <vector>
@@ -20,7 +21,6 @@ Shader::Shader(const std::string& vertFile, const std::string& fragFile)
 		std::stringstream sstr;
 		sstr << vsStream.rdbuf();
 		vertexCode = sstr.str();
-		vsStream.close();
 	}
 	else
 	{
@@ -28,19 +28,22 @@ Shader::Shader(const std::string& vertFile, const std::string& fragFile)
 		getchar();
 	}
 
+	vsStream.close();
+
 	std::ifstream fsStream(fragFile.c_str(), std::ios::in);
 	if (fsStream.is_open())
 	{
 		std::stringstream sstr;
 		sstr << fsStream.rdbuf();
 		fragmentCode = sstr.str();
-		fsStream.close();
 	}
 	else
 	{
 		printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", "test_fragment.fs");
 		getchar();
 	}
+
+	fsStream.close();
 
 	GLint result = GL_FALSE;
 	int infoLogLength;
@@ -105,8 +108,7 @@ void Shader::useShader()
 	glUseProgram(shaderID);
 }
 
-void Shader::update(Transform& transform)
+GLuint Shader::getShaderID()
 {
-	glm::mat4 model = transform.getMatrix();
-	glUniformMatrix4fv(glGetUniformLocation(shaderID, "transformMatrix"), 1, GL_FALSE, &model[0][0]);
+	return shaderID;
 }

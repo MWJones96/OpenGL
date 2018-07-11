@@ -1,8 +1,8 @@
-#version 430
+#version 330
 
-in vec3 color;
+in vec3 normal0;
 
 void main()
 {
-	gl_FragColor = vec4(color, 1.0f);
+	gl_FragColor = vec4(normal0, 1.0);
 }
